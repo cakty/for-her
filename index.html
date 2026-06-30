@@ -13,7 +13,8 @@
     body {
       margin: 0;
       min-height: 100vh;
-      overflow: hidden;
+      overflow-x: hidden;
+      overflow-y: auto;
       font-family: "Vazirmatn", sans-serif;
       direction: rtl;
       color: white;
@@ -29,50 +30,63 @@
     }
 
     .screen {
-      position: fixed;
-      inset: 0;
+      min-height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
-      padding: 25px;
-      transition: 1s ease;
+      padding: 28px 16px;
+      transition: 0.8s ease;
+      position: relative;
       z-index: 10;
     }
 
     .hidden {
-      opacity: 0;
-      pointer-events: none;
-      transform: scale(1.05);
+      display: none;
     }
 
     .box {
-      width: min(92vw, 600px);
+      width: min(94vw, 640px);
       text-align: center;
-      padding: 35px 28px;
+      padding: 34px 26px;
       border-radius: 30px;
-      background: rgba(255,255,255,0.16);
+      background: rgba(255,255,255,0.18);
       backdrop-filter: blur(18px);
-      box-shadow: 0 25px 80px rgba(0,0,0,0.25);
-      border: 1px solid rgba(255,255,255,0.28);
+      box-shadow: 0 25px 80px rgba(0,0,0,0.24);
+      border: 1px solid rgba(255,255,255,0.35);
+    }
+
+    .title-box {
+      display: inline-block;
+      padding: 10px 34px;
+      border-radius: 24px;
+      background: rgba(255,255,255,0.16);
+      border: 1px solid rgba(255,255,255,0.22);
+      margin-bottom: 18px;
     }
 
     h1 {
       font-family: "Lalezar", "Vazirmatn", sans-serif;
-      font-size: 52px;
-      margin: 0 0 12px;
-      text-shadow: 0 0 25px rgba(255,255,255,0.7);
+      font-size: clamp(42px, 8vw, 64px);
+      margin: 0;
+      line-height: 1.1;
+      color: #fff;
+      -webkit-text-stroke: 1.2px rgba(120, 30, 65, 0.55);
+      text-shadow:
+        0 3px 0 rgba(120, 30, 65, 0.18),
+        0 0 24px rgba(255,255,255,0.65);
     }
 
     p {
       line-height: 2;
       font-size: 17px;
+      margin: 14px 0;
     }
 
     input {
       width: 100%;
-      max-width: 320px;
+      max-width: 330px;
       padding: 14px 18px;
-      border: none;
+      border: 2px solid rgba(255,255,255,0.6);
       outline: none;
       border-radius: 999px;
       text-align: center;
@@ -80,87 +94,150 @@
       font-family: inherit;
       margin: 16px 0;
       color: #ff4f86;
-      font-weight: 700;
+      font-weight: 800;
+      background: rgba(255,255,255,0.95);
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      direction: ltr;
+      margin: 22px 0;
     }
 
     button {
       border: none;
       cursor: pointer;
-      padding: 13px 25px;
+      padding: 13px 24px;
       border-radius: 999px;
       font-family: inherit;
       font-size: 16px;
-      font-weight: 800;
+      font-weight: 900;
       color: #ff4f86;
       background: white;
-      box-shadow: 0 12px 30px rgba(0,0,0,0.22);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.2);
       transition: 0.25s;
-      margin: 7px;
+      min-width: 155px;
     }
 
     button:hover {
       transform: translateY(-4px) scale(1.04);
     }
 
-    .main {
-      position: relative;
-      z-index: 3;
+    #visualizer {
+      width: min(100%, 430px);
+      height: 80px;
+      margin: 8px auto 18px;
+      display: block;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.12);
+    }
+
+    .envelope-wrap {
+      height: 340px;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      margin-top: 8px;
     }
 
     .envelope {
-      width: 240px;
-      height: 150px;
-      margin: 20px auto 30px;
+      width: 260px;
+      height: 170px;
       position: relative;
       cursor: pointer;
-      transform-style: preserve-3d;
+      transition: 0.4s ease;
     }
 
-    .env-body {
+    .envelope:hover {
+      transform: translateY(-5px);
+    }
+
+    .env-back {
       position: absolute;
       inset: 0;
       background: #fff;
-      border-radius: 12px;
-      box-shadow: 0 20px 45px rgba(0,0,0,0.25);
+      border-radius: 14px;
+      box-shadow: 0 20px 45px rgba(0,0,0,0.22);
+      z-index: 1;
+    }
+
+    .env-left {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      border-left: 130px solid #ffe4ed;
+      border-top: 85px solid transparent;
+      border-bottom: 85px solid transparent;
+      z-index: 4;
+    }
+
+    .env-right {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      border-right: 130px solid #ffd8e6;
+      border-top: 85px solid transparent;
+      border-bottom: 85px solid transparent;
+      z-index: 4;
+    }
+
+    .env-bottom {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      border-left: 130px solid transparent;
+      border-right: 130px solid transparent;
+      border-bottom: 90px solid #ffc3d8;
+      z-index: 5;
     }
 
     .env-flap {
       position: absolute;
-      top: 0;
       left: 0;
-      border-left: 120px solid transparent;
-      border-right: 120px solid transparent;
-      border-top: 80px solid #ffd1df;
+      top: 0;
+      border-left: 130px solid transparent;
+      border-right: 130px solid transparent;
+      border-top: 92px solid #ffb7d1;
       transform-origin: top;
-      transition: 1s ease;
-      z-index: 4;
-    }
-
-    .envelope.open .env-flap {
-      transform: rotateX(180deg);
+      transition: 0.8s ease;
+      z-index: 6;
     }
 
     .letter {
       position: absolute;
-      left: 18px;
-      bottom: 16px;
-      width: 204px;
-      height: 120px;
-      background: #fff7fb;
-      color: #ff4f86;
-      border-radius: 10px;
-      padding: 15px;
-      font-size: 14px;
-      line-height: 1.8;
-      transition: 1s ease;
+      left: 20px;
+      bottom: 20px;
+      width: 220px;
+      min-height: 130px;
+      background: #fff8fb;
+      color: #ff3f7f;
+      border-radius: 13px;
+      padding: 16px 15px;
+      font-size: 13.5px;
+      line-height: 2;
+      transition: 0.9s ease;
       z-index: 2;
-      overflow: hidden;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+    }
+
+    .envelope.open .env-flap {
+      transform: rotateX(180deg);
+      z-index: 0;
     }
 
     .envelope.open .letter {
-      transform: translateY(-130px);
-      height: 230px;
-      z-index: 5;
+      transform: translateY(-155px);
+      z-index: 7;
+    }
+
+    .hint {
+      margin-top: -8px;
+      font-size: 14px;
+      opacity: 0.95;
     }
 
     .petal, .heart {
@@ -185,35 +262,27 @@
 
     .heart {
       font-size: 28px;
-      transition: transform 0.15s linear;
       filter: drop-shadow(0 0 10px rgba(255,255,255,0.6));
     }
 
-    canvas {
+    #fireworks {
       position: fixed;
       inset: 0;
       pointer-events: none;
       z-index: 2;
     }
 
-    #visualizer {
-      width: 100%;
-      max-width: 420px;
-      height: 90px;
-      margin: 10px auto;
-      display: block;
-      border-radius: 20px;
-      background: rgba(255,255,255,0.12);
-    }
-
     .final-message {
-      font-family: "Lalezar", sans-serif;
-      font-size: 48px;
-      margin-top: 18px;
+      font-family: "Lalezar", "Vazirmatn", sans-serif;
+      font-size: clamp(36px, 7vw, 58px);
+      margin-top: 20px;
       opacity: 0;
       transform: scale(0.8);
       transition: 1s ease;
+      color: white;
+      -webkit-text-stroke: 1px rgba(120, 30, 65, 0.55);
       text-shadow: 0 0 25px white;
+      direction: ltr;
     }
 
     .final-message.show {
@@ -225,6 +294,14 @@
       font-size: 14px;
       opacity: 0.9;
     }
+
+    @media (max-width: 520px) {
+      .box { padding: 28px 16px; }
+      .envelope { transform: scale(0.9); }
+      .envelope:hover { transform: scale(0.9) translateY(-5px); }
+      .envelope-wrap { height: 320px; }
+      button { width: 100%; max-width: 260px; }
+    }
   </style>
 </head>
 
@@ -232,10 +309,11 @@
   <audio id="music" src="music.mp3" loop></audio>
   <canvas id="fireworks"></canvas>
 
-  <!-- Login Screen -->
   <section class="screen" id="loginScreen">
     <div class="box">
-      <h1>یه راز کوچولو ✨</h1>
+      <div class="title-box">
+        <h1>یه راز کوچولو ✨</h1>
+      </div>
       <p>برای ورود، رمز مخصوص خودتو بزن</p>
       <input id="passwordInput" type="password" placeholder="Password" />
       <br />
@@ -244,33 +322,42 @@
     </div>
   </section>
 
-  <!-- Main Screen -->
   <section class="screen hidden main" id="mainScreen">
     <div class="box">
-      <h1>برای انیسه ❤️</h1>
+      <div class="title-box">
+        <h1>برای انیسه ❤️</h1>
+      </div>
+
       <p>
-        این صفحه فقط برای تو ساخته شده؛  
+        این صفحه فقط برای تو ساخته شده؛<br>
         یه کادوی کوچیک از راه دور، ولی با کلی حس قشنگ.
       </p>
 
-      <button onclick="playMusic()">Play music 🎵</button>
-      <button onclick="startFinal()">Final surprise 🎆</button>
+      <div class="buttons">
+        <button onclick="playMusic()">Play music 🎵</button>
+        <button onclick="startFinal()">Final surprise 🎆</button>
+      </div>
 
       <canvas id="visualizer"></canvas>
 
-      <div class="envelope" onclick="openEnvelope()" id="envelope">
-        <div class="letter">
-          عزیزترینم،<br>
-          شاید فاصله بین ما زیاد باشه،  
-          ولی تو همیشه نزدیک‌ترین آدم به قلب منی.  
-          این صفحه رو ساختم که هر وقت بازش کردی،  
-          یادت بیاد یه نفر اون‌طرف دنیا با فکر تو لبخند می‌زنه. 💕
+      <div class="envelope-wrap">
+        <div class="envelope" onclick="openEnvelope()" id="envelope">
+          <div class="env-back"></div>
+          <div class="letter">
+            عزیزترینم،<br>
+            شاید فاصله بین ما زیاد باشه،
+            ولی تو همیشه نزدیک‌ترین آدم به قلب منی.
+            این صفحه رو ساختم که هر وقت بازش کردی،
+            یادت بیاد یه نفر اون‌طرف دنیا با فکر تو لبخند می‌زنه. 💕
+          </div>
+          <div class="env-left"></div>
+          <div class="env-right"></div>
+          <div class="env-bottom"></div>
+          <div class="env-flap"></div>
         </div>
-        <div class="env-body"></div>
-        <div class="env-flap"></div>
       </div>
 
-      <p class="small">روی پاکت کلیک کن 💌</p>
+      <p class="hint">روی پاکت کلیک کن 💌</p>
 
       <div class="final-message" id="finalMessage">
         Happy Girl's Day, Anise ❤️
@@ -305,25 +392,23 @@
       startVisualizer();
     }
 
-    // Falling petals
     function createPetal() {
       const petal = document.createElement("div");
       petal.className = "petal";
       petal.innerText = ["🌸", "🌺", "💮", "🌷"][Math.floor(Math.random() * 4)];
       petal.style.left = Math.random() * 100 + "vw";
       petal.style.animationDuration = 5 + Math.random() * 5 + "s";
-      petal.style.opacity = 0.6 + Math.random() * 0.4;
+      petal.style.opacity = 0.55 + Math.random() * 0.35;
       document.body.appendChild(petal);
-
       setTimeout(() => petal.remove(), 10000);
     }
 
-    setInterval(createPetal, 450);
+    setInterval(createPetal, 650);
 
-    // Hearts following / escaping mouse
     const hearts = [];
     let mouseX = window.innerWidth / 2;
     let mouseY = window.innerHeight / 2;
+    let heartsStarted = false;
 
     document.addEventListener("mousemove", e => {
       mouseX = e.clientX;
@@ -331,13 +416,16 @@
     });
 
     function createHearts() {
-      for (let i = 0; i < 12; i++) {
+      if (heartsStarted) return;
+      heartsStarted = true;
+
+      for (let i = 0; i < 10; i++) {
         const heart = document.createElement("div");
         heart.className = "heart";
         heart.innerText = "💖";
-        heart.x = Math.random() * window.innerWidth;
-        heart.y = Math.random() * window.innerHeight;
-        heart.speed = 0.015 + Math.random() * 0.025;
+        heart.x = Math.random() * (window.innerWidth - 60);
+        heart.y = Math.random() * (window.innerHeight - 60);
+        heart.speed = 0.012 + Math.random() * 0.018;
         document.body.appendChild(heart);
         hearts.push(heart);
       }
@@ -352,17 +440,18 @@
         const distance = Math.sqrt(dx * dx + dy * dy);
 
         if (index % 2 === 0) {
-          // follow mouse
           heart.x += dx * heart.speed;
           heart.y += dy * heart.speed;
         } else if (distance < 160) {
-          // escape mouse
-          heart.x -= dx * 0.04;
-          heart.y -= dy * 0.04;
+          heart.x -= dx * 0.035;
+          heart.y -= dy * 0.035;
         }
 
-        heart.x += Math.sin(Date.now() / 600 + index) * 0.6;
-        heart.y += Math.cos(Date.now() / 700 + index) * 0.6;
+        heart.x += Math.sin(Date.now() / 700 + index) * 0.45;
+        heart.y += Math.cos(Date.now() / 800 + index) * 0.45;
+
+        heart.x = Math.max(10, Math.min(window.innerWidth - 45, heart.x));
+        heart.y = Math.max(10, Math.min(window.innerHeight - 45, heart.y));
 
         heart.style.transform = `translate(${heart.x}px, ${heart.y}px)`;
       });
@@ -370,14 +459,14 @@
       requestAnimationFrame(animateHearts);
     }
 
-    // Music visualizer
     let audioStarted = false;
 
     function startVisualizer() {
       if (audioStarted) return;
       audioStarted = true;
 
-      const audioContext = new AudioContext();
+      const AudioCtx = window.AudioContext || window.webkitAudioContext;
+      const audioContext = new AudioCtx();
       const source = audioContext.createMediaElementSource(music);
       const analyser = audioContext.createAnalyser();
 
@@ -388,13 +477,11 @@
 
       const bufferLength = analyser.frequencyBinCount;
       const dataArray = new Uint8Array(bufferLength);
-
       const canvas = document.getElementById("visualizer");
       const ctx = canvas.getContext("2d");
 
       function draw() {
         requestAnimationFrame(draw);
-
         analyser.getByteFrequencyData(dataArray);
 
         canvas.width = canvas.offsetWidth;
@@ -409,15 +496,14 @@
           const x = i * barWidth;
           const y = canvas.height - barHeight;
 
-          ctx.fillStyle = "rgba(255,255,255,0.85)";
-          ctx.fillRect(x, y, barWidth - 2, barHeight);
+          ctx.fillStyle = "rgba(255,255,255,0.88)";
+          ctx.fillRect(x, y, Math.max(2, barWidth - 2), barHeight);
         }
       }
 
       draw();
     }
 
-    // Fireworks
     const fwCanvas = document.getElementById("fireworks");
     const fwCtx = fwCanvas.getContext("2d");
     let particles = [];
@@ -431,7 +517,7 @@
     window.addEventListener("resize", resizeCanvas);
 
     function firework(x, y) {
-      for (let i = 0; i < 80; i++) {
+      for (let i = 0; i < 85; i++) {
         particles.push({
           x,
           y,
@@ -449,7 +535,7 @@
       particles.forEach((p, index) => {
         p.x += p.vx;
         p.y += p.vy;
-        p.vy += 0.03;
+        p.vy += 0.035;
         p.life--;
 
         fwCtx.beginPath();
@@ -468,13 +554,13 @@
     function startFinal() {
       document.getElementById("finalMessage").classList.add("show");
 
-      for (let i = 0; i < 7; i++) {
+      for (let i = 0; i < 8; i++) {
         setTimeout(() => {
           firework(
             Math.random() * window.innerWidth,
-            Math.random() * window.innerHeight * 0.6
+            Math.random() * window.innerHeight * 0.58
           );
-        }, i * 500);
+        }, i * 450);
       }
     }
   </script>
