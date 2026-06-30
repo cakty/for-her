@@ -1,3 +1,6 @@
+آره، این نسخه‌ی کامل با حذف مستطیل سفید پشت پاکت و تنظیم بهتر نامه‌ست:
+
+```html
 <!DOCTYPE html>
 <html lang="fa">
 <head>
@@ -7,7 +10,6 @@
 
   <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700;900&display=swap" rel="stylesheet">
 
-  
   <style>
     * { box-sizing: border-box; }
 
@@ -134,7 +136,7 @@
     }
 
     .envelope-wrap {
-      height: 410px;
+      height: 480px;
       display: flex;
       justify-content: center;
       align-items: flex-end;
@@ -149,12 +151,7 @@
     }
 
     .env-back {
-      position: absolute;
-      inset: 0;
-      background: #fff;
-      border-radius: 14px;
-      box-shadow: 0 20px 45px rgba(0,0,0,0.22);
-      z-index: 1;
+      display: none;
     }
 
     .env-left {
@@ -228,8 +225,8 @@
     }
 
     .envelope.open .letter {
-      height: 365px;
-      transform: translateY(-125px);
+      height: 340px;
+      transform: translateY(-95px);
       z-index: 7;
       overflow-y: auto;
     }
@@ -300,7 +297,7 @@
       .title-box { padding: 10px 22px; }
       h1 { font-size: 38px; }
       .envelope { transform: scale(0.88); }
-      .envelope-wrap { height: 395px; }
+      .envelope-wrap { height: 455px; }
       button { width: 100%; max-width: 250px; }
       .letter {
         left: -30px;
@@ -334,9 +331,7 @@
         <h1>برای انیسه ❤️</h1>
       </div>
 
-      <p>
-        این صفحه رو فقط برای تو ساختم<br>
-      </p>
+      <p>این صفحه رو فقط برای تو ساختم</p>
 
       <div class="buttons">
         <button onclick="playMusic()">Play music 🎵</button>
@@ -588,3 +583,4 @@
   </script>
 </body>
 </html>
+```
