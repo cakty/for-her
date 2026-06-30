@@ -34,7 +34,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      padding: 28px 16px;
+      padding: 24px 16px;
       position: relative;
       z-index: 10;
     }
@@ -44,7 +44,7 @@
     .box {
       width: min(94vw, 640px);
       text-align: center;
-      padding: 34px 26px;
+      padding: 28px 24px;
       border-radius: 30px;
       background: rgba(255,255,255,0.18);
       backdrop-filter: blur(18px);
@@ -58,7 +58,7 @@
       border-radius: 22px;
       background: rgba(255,255,255,0.13);
       border: 1px solid rgba(255,255,255,0.25);
-      margin-bottom: 18px;
+      margin-bottom: 16px;
       max-width: 100%;
     }
 
@@ -76,9 +76,9 @@
     }
 
     p {
-      line-height: 2;
-      font-size: 17px;
-      margin: 14px 0;
+      line-height: 1.9;
+      font-size: 16px;
+      margin: 10px 0;
     }
 
     input {
@@ -103,7 +103,7 @@
       gap: 14px;
       flex-wrap: wrap;
       direction: ltr;
-      margin: 22px 0;
+      margin: 18px 0 12px;
     }
 
     button {
@@ -121,34 +121,38 @@
       min-width: 155px;
     }
 
-    button:hover { transform: translateY(-4px) scale(1.04); }
+    button:hover {
+      transform: translateY(-4px) scale(1.04);
+    }
 
     #visualizer {
       width: min(100%, 430px);
-      height: 80px;
-      margin: 8px auto 18px;
+      height: 58px;
+      margin: 6px auto 8px;
       display: block;
-      border-radius: 20px;
-      background: rgba(255,255,255,0.12);
+      border-radius: 18px;
+      background: rgba(255,255,255,0.10);
     }
 
     .envelope-wrap {
-      height: 340px;
+      height: 285px;
       display: flex;
       justify-content: center;
       align-items: flex-end;
-      margin-top: 8px;
+      margin-top: 0;
     }
 
     .envelope {
-      width: 260px;
-      height: 170px;
+      width: 230px;
+      height: 150px;
       position: relative;
       cursor: pointer;
       transition: 0.4s ease;
     }
 
-    .envelope:hover { transform: translateY(-5px); }
+    .envelope:hover {
+      transform: translateY(-5px);
+    }
 
     .env-back {
       position: absolute;
@@ -163,9 +167,9 @@
       position: absolute;
       left: 0;
       bottom: 0;
-      border-left: 130px solid #ffe4ed;
-      border-top: 85px solid transparent;
-      border-bottom: 85px solid transparent;
+      border-left: 115px solid #ffe4ed;
+      border-top: 75px solid transparent;
+      border-bottom: 75px solid transparent;
       z-index: 4;
     }
 
@@ -173,9 +177,9 @@
       position: absolute;
       right: 0;
       bottom: 0;
-      border-right: 130px solid #ffd8e6;
-      border-top: 85px solid transparent;
-      border-bottom: 85px solid transparent;
+      border-right: 115px solid #ffd8e6;
+      border-top: 75px solid transparent;
+      border-bottom: 75px solid transparent;
       z-index: 4;
     }
 
@@ -183,9 +187,9 @@
       position: absolute;
       left: 0;
       bottom: 0;
-      border-left: 130px solid transparent;
-      border-right: 130px solid transparent;
-      border-bottom: 90px solid #ffc3d8;
+      border-left: 115px solid transparent;
+      border-right: 115px solid transparent;
+      border-bottom: 80px solid #ffc3d8;
       z-index: 5;
     }
 
@@ -193,9 +197,9 @@
       position: absolute;
       left: 0;
       top: 0;
-      border-left: 130px solid transparent;
-      border-right: 130px solid transparent;
-      border-top: 92px solid #ffb7d1;
+      border-left: 115px solid transparent;
+      border-right: 115px solid transparent;
+      border-top: 82px solid #ffb7d1;
       transform-origin: top;
       transition: 0.8s ease;
       z-index: 6;
@@ -203,16 +207,16 @@
 
     .letter {
       position: absolute;
-      left: 20px;
-      bottom: 20px;
-      width: 220px;
-      min-height: 130px;
+      left: 15px;
+      bottom: 18px;
+      width: 200px;
+      min-height: 118px;
       background: #fff8fb;
       color: #ff3f7f;
       border-radius: 13px;
-      padding: 16px 15px;
-      font-size: 13.5px;
-      line-height: 2;
+      padding: 13px 14px;
+      font-size: 12.8px;
+      line-height: 1.9;
       transition: 0.9s ease;
       z-index: 2;
       box-shadow: 0 10px 25px rgba(0,0,0,0.12);
@@ -224,12 +228,12 @@
     }
 
     .envelope.open .letter {
-      transform: translateY(-155px);
+      transform: translateY(-125px);
       z-index: 7;
     }
 
     .hint {
-      margin-top: -8px;
+      margin-top: -2px;
       font-size: 14px;
       opacity: 0.95;
     }
@@ -267,8 +271,8 @@
     }
 
     .final-message {
-      font-size: clamp(36px, 7vw, 58px);
-      margin-top: 20px;
+      font-size: clamp(34px, 7vw, 56px);
+      margin-top: 10px;
       opacity: 0;
       transform: scale(0.8);
       transition: 1s ease;
@@ -290,11 +294,13 @@
     }
 
     @media (max-width: 520px) {
-      .box { padding: 28px 16px; }
-      .envelope { transform: scale(0.9); }
-      .envelope:hover { transform: scale(0.9) translateY(-5px); }
-      .envelope-wrap { height: 320px; }
-      button { width: 100%; max-width: 260px; }
+      .box { padding: 24px 14px; }
+      .title-box { padding: 10px 22px; }
+      h1 { font-size: 38px; }
+      .envelope { transform: scale(0.88); }
+      .envelope:hover { transform: scale(0.88) translateY(-5px); }
+      .envelope-wrap { height: 270px; }
+      button { width: 100%; max-width: 250px; }
     }
   </style>
 </head>
@@ -337,6 +343,7 @@
       <div class="envelope-wrap">
         <div class="envelope" onclick="openEnvelope()" id="envelope">
           <div class="env-back"></div>
+
           <div class="letter">
             عزیزترینم،<br>
             شاید فاصله بین ما زیاد باشه،
@@ -344,6 +351,7 @@
             این صفحه رو ساختم که هر وقت بازش کردی،
             یادت بیاد یه نفر اون‌طرف دنیا با فکر تو لبخند می‌زنه. 💕
           </div>
+
           <div class="env-left"></div>
           <div class="env-right"></div>
           <div class="env-bottom"></div>
