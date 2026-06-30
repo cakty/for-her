@@ -148,9 +148,7 @@
       transition: 0.4s ease;
     }
 
-    .env-back {
-      display: none;
-    }
+    .env-back { display: none; }
 
     .env-left {
       position: absolute;
@@ -335,7 +333,7 @@
       <p>این صفحه رو فقط برای تو ساختم</p>
 
       <div class="buttons">
-        <button onclick="playMusic()">Play music 🎵</button>
+        <button id="musicBtn" onclick="toggleMusic()">Pause music ⏸️</button>
         <button onclick="startFinal()">Final surprise 🎆</button>
       </div>
 
@@ -396,6 +394,7 @@
         loginScreen.classList.add("hidden");
         mainScreen.classList.remove("hidden");
         createHearts();
+        playMusic();
       } else {
         wrongText.innerText = "نه نه، رمز این نیست 😄";
       }
@@ -406,9 +405,25 @@
     }
 
     function playMusic() {
+      music.loop = true;
       music.play();
       document.getElementById("visualizer").style.display = "block";
+      document.getElementById("musicBtn").innerText = "Pause music ⏸️";
       startVisualizer();
+    }
+
+    function toggleMusic() {
+      const btn = document.getElementById("musicBtn");
+
+      if (music.paused) {
+        music.play();
+        btn.innerText = "Pause music ⏸️";
+        document.getElementById("visualizer").style.display = "block";
+        startVisualizer();
+      } else {
+        music.pause();
+        btn.innerText = "Play music 🎵";
+      }
     }
 
     function createPetal() {
