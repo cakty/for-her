@@ -3,232 +3,479 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>For You 💖</title>
+  <title>For Anise ❤️</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;700;900&family=Lalezar&display=swap" rel="stylesheet">
 
   <style>
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
       min-height: 100vh;
+      overflow: hidden;
       font-family: "Vazirmatn", sans-serif;
       direction: rtl;
       color: white;
-      overflow: hidden;
-      background: linear-gradient(-45deg, #ff758c, #ff7eb3, #a18cd1, #fbc2eb);
+      background: linear-gradient(-45deg, #ff7eb3, #ff758c, #a18cd1, #fbc2eb);
       background-size: 400% 400%;
-      animation: gradientMove 10s ease infinite;
+      animation: bgMove 10s ease infinite;
     }
 
-    @keyframes gradientMove {
+    @keyframes bgMove {
       0% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
     }
 
-    .stars, .hearts {
+    .screen {
       position: fixed;
       inset: 0;
-      pointer-events: none;
-      overflow: hidden;
-    }
-
-    .star {
-      position: absolute;
-      width: 3px;
-      height: 3px;
-      background: white;
-      border-radius: 50%;
-      opacity: 0.8;
-      animation: twinkle 2s infinite ease-in-out alternate;
-    }
-
-    @keyframes twinkle {
-      from { opacity: 0.2; transform: scale(0.8); }
-      to { opacity: 1; transform: scale(1.6); }
-    }
-
-    .heart {
-      position: absolute;
-      font-size: 22px;
-      animation: floatUp 6s linear forwards;
-      opacity: 0.8;
-    }
-
-    @keyframes floatUp {
-      0% { transform: translateY(110vh) scale(0.7) rotate(0deg); opacity: 0; }
-      15% { opacity: 1; }
-      100% { transform: translateY(-20vh) scale(1.5) rotate(360deg); opacity: 0; }
-    }
-
-    .container {
-      min-height: 100vh;
       display: flex;
-      align-items: center;
       justify-content: center;
-      padding: 24px;
-      position: relative;
-      z-index: 2;
+      align-items: center;
+      padding: 25px;
+      transition: 1s ease;
+      z-index: 10;
     }
 
-    .card {
-      width: min(92vw, 620px);
-      padding: 34px 28px;
+    .hidden {
+      opacity: 0;
+      pointer-events: none;
+      transform: scale(1.05);
+    }
+
+    .box {
+      width: min(92vw, 600px);
       text-align: center;
-      border-radius: 28px;
-      background: rgba(255, 255, 255, 0.16);
+      padding: 35px 28px;
+      border-radius: 30px;
+      background: rgba(255,255,255,0.16);
       backdrop-filter: blur(18px);
-      box-shadow: 0 20px 70px rgba(0,0,0,0.25);
-      animation: cardEnter 1.4s ease forwards;
-      border: 1px solid rgba(255,255,255,0.25);
-    }
-
-    @keyframes cardEnter {
-      from { opacity: 0; transform: translateY(40px) scale(0.95); }
-      to { opacity: 1; transform: translateY(0) scale(1); }
+      box-shadow: 0 25px 80px rgba(0,0,0,0.25);
+      border: 1px solid rgba(255,255,255,0.28);
     }
 
     h1 {
-      font-size: 42px;
-      margin: 0 0 14px;
-      font-weight: 900;
-      text-shadow: 0 4px 20px rgba(0,0,0,0.2);
+      font-family: "Lalezar", "Vazirmatn", sans-serif;
+      font-size: 52px;
+      margin: 0 0 12px;
+      text-shadow: 0 0 25px rgba(255,255,255,0.7);
     }
 
-    .subtitle {
-      font-size: 18px;
+    p {
       line-height: 2;
-      margin-bottom: 24px;
+      font-size: 17px;
+    }
+
+    input {
+      width: 100%;
+      max-width: 320px;
+      padding: 14px 18px;
+      border: none;
+      outline: none;
+      border-radius: 999px;
+      text-align: center;
+      font-size: 18px;
+      font-family: inherit;
+      margin: 16px 0;
+      color: #ff4f86;
+      font-weight: 700;
     }
 
     button {
       border: none;
       cursor: pointer;
-      padding: 13px 24px;
+      padding: 13px 25px;
       border-radius: 999px;
       font-family: inherit;
       font-size: 16px;
-      font-weight: 700;
+      font-weight: 800;
       color: #ff4f86;
       background: white;
-      box-shadow: 0 12px 30px rgba(0,0,0,0.2);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.22);
       transition: 0.25s;
-      margin: 6px;
+      margin: 7px;
     }
 
     button:hover {
-      transform: translateY(-4px) scale(1.03);
+      transform: translateY(-4px) scale(1.04);
+    }
+
+    .main {
+      position: relative;
+      z-index: 3;
+    }
+
+    .envelope {
+      width: 240px;
+      height: 150px;
+      margin: 20px auto 30px;
+      position: relative;
+      cursor: pointer;
+      transform-style: preserve-3d;
+    }
+
+    .env-body {
+      position: absolute;
+      inset: 0;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 20px 45px rgba(0,0,0,0.25);
+    }
+
+    .env-flap {
+      position: absolute;
+      top: 0;
+      left: 0;
+      border-left: 120px solid transparent;
+      border-right: 120px solid transparent;
+      border-top: 80px solid #ffd1df;
+      transform-origin: top;
+      transition: 1s ease;
+      z-index: 4;
+    }
+
+    .envelope.open .env-flap {
+      transform: rotateX(180deg);
     }
 
     .letter {
-      max-height: 0;
-      overflow: hidden;
-      opacity: 0;
+      position: absolute;
+      left: 18px;
+      bottom: 16px;
+      width: 204px;
+      height: 120px;
+      background: #fff7fb;
+      color: #ff4f86;
+      border-radius: 10px;
+      padding: 15px;
+      font-size: 14px;
+      line-height: 1.8;
       transition: 1s ease;
-      margin-top: 18px;
-      line-height: 2.2;
-      font-size: 17px;
-      background: rgba(255,255,255,0.14);
-      border-radius: 22px;
-      padding: 0 20px;
+      z-index: 2;
+      overflow: hidden;
     }
 
-    .letter.open {
-      max-height: 500px;
+    .envelope.open .letter {
+      transform: translateY(-130px);
+      height: 230px;
+      z-index: 5;
+    }
+
+    .petal, .heart {
+      position: fixed;
+      pointer-events: none;
+      z-index: 1;
+      user-select: none;
+    }
+
+    .petal {
+      top: -40px;
+      font-size: 24px;
+      animation: fall linear forwards;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(110vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    .heart {
+      font-size: 28px;
+      transition: transform 0.15s linear;
+      filter: drop-shadow(0 0 10px rgba(255,255,255,0.6));
+    }
+
+    canvas {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    #visualizer {
+      width: 100%;
+      max-width: 420px;
+      height: 90px;
+      margin: 10px auto;
+      display: block;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.12);
+    }
+
+    .final-message {
+      font-family: "Lalezar", sans-serif;
+      font-size: 48px;
+      margin-top: 18px;
+      opacity: 0;
+      transform: scale(0.8);
+      transition: 1s ease;
+      text-shadow: 0 0 25px white;
+    }
+
+    .final-message.show {
       opacity: 1;
-      padding: 20px;
+      transform: scale(1);
     }
 
-    .music-note {
-      margin-top: 18px;
+    .small {
       font-size: 14px;
       opacity: 0.9;
-    }
-
-    .glow {
-      animation: glow 2s ease-in-out infinite alternate;
-    }
-
-    @keyframes glow {
-      from { text-shadow: 0 0 10px rgba(255,255,255,0.4); }
-      to { text-shadow: 0 0 26px rgba(255,255,255,0.95); }
     }
   </style>
 </head>
 
 <body>
-  <div class="stars" id="stars"></div>
-  <div class="hearts" id="hearts"></div>
+  <audio id="music" src="music.mp3" loop></audio>
+  <canvas id="fireworks"></canvas>
 
-  <audio id="bgMusic" loop>
-    <source src="music.mp3" type="audio/mpeg">
-  </audio>
+  <!-- Login Screen -->
+  <section class="screen" id="loginScreen">
+    <div class="box">
+      <h1>یه راز کوچولو ✨</h1>
+      <p>برای ورود، رمز مخصوص خودتو بزن</p>
+      <input id="passwordInput" type="password" placeholder="Password" />
+      <br />
+      <button onclick="checkPassword()">Enter 💖</button>
+      <p class="small" id="wrongText"></p>
+    </div>
+  </section>
 
-  <div class="container">
-    <div class="card">
-      <h1 class="glow">برای تو 💖</h1>
-
-      <p class="subtitle">
-        این صفحه فقط برای تو ساخته شده...<br>
-        چون بعضی آدم‌ها حتی از دور هم نزدیک‌ترین حس دنیا رو میدن.
+  <!-- Main Screen -->
+  <section class="screen hidden main" id="mainScreen">
+    <div class="box">
+      <h1>برای انیسه ❤️</h1>
+      <p>
+        این صفحه فقط برای تو ساخته شده؛  
+        یه کادوی کوچیک از راه دور، ولی با کلی حس قشنگ.
       </p>
 
       <button onclick="playMusic()">Play music 🎵</button>
-      <button onclick="openLetter()">Open my letter 💌</button>
+      <button onclick="startFinal()">Final surprise 🎆</button>
 
-      <div class="letter" id="letter">
-        عزیزترینم،<br><br>
-        شاید الان کنار هم نباشیم، ولی یه قسمت قشنگ از روزهای من همیشه پیش توئه.
-        خواستم برای روز دختر یه چیزی داشته باشی که فقط مال خودت باشه؛
-        نه یه کادوی معمولی، یه گوشه کوچیک از دلم روی اینترنت.  
-        <br><br>
-        هر وقت این صفحه رو دیدی، یادت باشه یه نفر اون‌طرف دنیا
-        با فکر تو لبخند می‌زنه. 💕
+      <canvas id="visualizer"></canvas>
+
+      <div class="envelope" onclick="openEnvelope()" id="envelope">
+        <div class="letter">
+          عزیزترینم،<br>
+          شاید فاصله بین ما زیاد باشه،  
+          ولی تو همیشه نزدیک‌ترین آدم به قلب منی.  
+          این صفحه رو ساختم که هر وقت بازش کردی،  
+          یادت بیاد یه نفر اون‌طرف دنیا با فکر تو لبخند می‌زنه. 💕
+        </div>
+        <div class="env-body"></div>
+        <div class="env-flap"></div>
       </div>
 
-      <div class="music-note">
-        اول موزیک رو پلی کن، بعد نامه رو باز کن :)
+      <p class="small">روی پاکت کلیک کن 💌</p>
+
+      <div class="final-message" id="finalMessage">
+        Happy Girl's Day, Anise ❤️
       </div>
     </div>
-  </div>
+  </section>
 
   <script>
-    const stars = document.getElementById("stars");
-    const hearts = document.getElementById("hearts");
+    const loginScreen = document.getElementById("loginScreen");
+    const mainScreen = document.getElementById("mainScreen");
+    const wrongText = document.getElementById("wrongText");
+    const music = document.getElementById("music");
 
-    for (let i = 0; i < 80; i++) {
-      const star = document.createElement("div");
-      star.className = "star";
-      star.style.left = Math.random() * 100 + "vw";
-      star.style.top = Math.random() * 100 + "vh";
-      star.style.animationDelay = Math.random() * 2 + "s";
-      stars.appendChild(star);
+    function checkPassword() {
+      const pass = document.getElementById("passwordInput").value.trim();
+
+      if (pass.toLowerCase() === "anise") {
+        loginScreen.classList.add("hidden");
+        mainScreen.classList.remove("hidden");
+        createHearts();
+      } else {
+        wrongText.innerText = "نه نه، رمز این نیست 😄";
+      }
     }
 
-    function createHeart() {
-      const heart = document.createElement("div");
-      heart.className = "heart";
-      heart.innerHTML = ["💖", "💕", "💗", "✨"][Math.floor(Math.random() * 4)];
-      heart.style.left = Math.random() * 100 + "vw";
-      heart.style.animationDuration = 4 + Math.random() * 4 + "s";
-      hearts.appendChild(heart);
-
-      setTimeout(() => heart.remove(), 8000);
-    }
-
-    setInterval(createHeart, 350);
-
-    function openLetter() {
-      document.getElementById("letter").classList.toggle("open");
+    function openEnvelope() {
+      document.getElementById("envelope").classList.toggle("open");
     }
 
     function playMusic() {
-      const music = document.getElementById("bgMusic");
       music.play();
+      startVisualizer();
+    }
+
+    // Falling petals
+    function createPetal() {
+      const petal = document.createElement("div");
+      petal.className = "petal";
+      petal.innerText = ["🌸", "🌺", "💮", "🌷"][Math.floor(Math.random() * 4)];
+      petal.style.left = Math.random() * 100 + "vw";
+      petal.style.animationDuration = 5 + Math.random() * 5 + "s";
+      petal.style.opacity = 0.6 + Math.random() * 0.4;
+      document.body.appendChild(petal);
+
+      setTimeout(() => petal.remove(), 10000);
+    }
+
+    setInterval(createPetal, 450);
+
+    // Hearts following / escaping mouse
+    const hearts = [];
+    let mouseX = window.innerWidth / 2;
+    let mouseY = window.innerHeight / 2;
+
+    document.addEventListener("mousemove", e => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+    });
+
+    function createHearts() {
+      for (let i = 0; i < 12; i++) {
+        const heart = document.createElement("div");
+        heart.className = "heart";
+        heart.innerText = "💖";
+        heart.x = Math.random() * window.innerWidth;
+        heart.y = Math.random() * window.innerHeight;
+        heart.speed = 0.015 + Math.random() * 0.025;
+        document.body.appendChild(heart);
+        hearts.push(heart);
+      }
+
+      animateHearts();
+    }
+
+    function animateHearts() {
+      hearts.forEach((heart, index) => {
+        const dx = mouseX - heart.x;
+        const dy = mouseY - heart.y;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+
+        if (index % 2 === 0) {
+          // follow mouse
+          heart.x += dx * heart.speed;
+          heart.y += dy * heart.speed;
+        } else if (distance < 160) {
+          // escape mouse
+          heart.x -= dx * 0.04;
+          heart.y -= dy * 0.04;
+        }
+
+        heart.x += Math.sin(Date.now() / 600 + index) * 0.6;
+        heart.y += Math.cos(Date.now() / 700 + index) * 0.6;
+
+        heart.style.transform = `translate(${heart.x}px, ${heart.y}px)`;
+      });
+
+      requestAnimationFrame(animateHearts);
+    }
+
+    // Music visualizer
+    let audioStarted = false;
+
+    function startVisualizer() {
+      if (audioStarted) return;
+      audioStarted = true;
+
+      const audioContext = new AudioContext();
+      const source = audioContext.createMediaElementSource(music);
+      const analyser = audioContext.createAnalyser();
+
+      source.connect(analyser);
+      analyser.connect(audioContext.destination);
+
+      analyser.fftSize = 128;
+
+      const bufferLength = analyser.frequencyBinCount;
+      const dataArray = new Uint8Array(bufferLength);
+
+      const canvas = document.getElementById("visualizer");
+      const ctx = canvas.getContext("2d");
+
+      function draw() {
+        requestAnimationFrame(draw);
+
+        analyser.getByteFrequencyData(dataArray);
+
+        canvas.width = canvas.offsetWidth;
+        canvas.height = canvas.offsetHeight;
+
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        const barWidth = canvas.width / bufferLength;
+
+        for (let i = 0; i < bufferLength; i++) {
+          const barHeight = dataArray[i] / 2;
+          const x = i * barWidth;
+          const y = canvas.height - barHeight;
+
+          ctx.fillStyle = "rgba(255,255,255,0.85)";
+          ctx.fillRect(x, y, barWidth - 2, barHeight);
+        }
+      }
+
+      draw();
+    }
+
+    // Fireworks
+    const fwCanvas = document.getElementById("fireworks");
+    const fwCtx = fwCanvas.getContext("2d");
+    let particles = [];
+
+    function resizeCanvas() {
+      fwCanvas.width = window.innerWidth;
+      fwCanvas.height = window.innerHeight;
+    }
+
+    resizeCanvas();
+    window.addEventListener("resize", resizeCanvas);
+
+    function firework(x, y) {
+      for (let i = 0; i < 80; i++) {
+        particles.push({
+          x,
+          y,
+          vx: (Math.random() - 0.5) * 8,
+          vy: (Math.random() - 0.5) * 8,
+          life: 100,
+          size: Math.random() * 3 + 2
+        });
+      }
+    }
+
+    function animateFireworks() {
+      fwCtx.clearRect(0, 0, fwCanvas.width, fwCanvas.height);
+
+      particles.forEach((p, index) => {
+        p.x += p.vx;
+        p.y += p.vy;
+        p.vy += 0.03;
+        p.life--;
+
+        fwCtx.beginPath();
+        fwCtx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        fwCtx.fillStyle = `rgba(255,255,255,${p.life / 100})`;
+        fwCtx.fill();
+
+        if (p.life <= 0) particles.splice(index, 1);
+      });
+
+      requestAnimationFrame(animateFireworks);
+    }
+
+    animateFireworks();
+
+    function startFinal() {
+      document.getElementById("finalMessage").classList.add("show");
+
+      for (let i = 0; i < 7; i++) {
+        setTimeout(() => {
+          firework(
+            Math.random() * window.innerWidth,
+            Math.random() * window.innerHeight * 0.6
+          );
+        }, i * 500);
+      }
     }
   </script>
 </body>
