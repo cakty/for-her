@@ -129,7 +129,7 @@
       width: min(100%, 430px);
       height: 58px;
       margin: 6px auto 8px;
-      display: block;
+      display: none;
       border-radius: 18px;
       background: rgba(255,255,255,0.10);
     }
@@ -210,16 +210,17 @@
       left: 15px;
       bottom: 18px;
       width: 200px;
-      min-height: 118px;
+      height: 118px;
       background: #fff8fb;
       color: #ff3f7f;
       border-radius: 13px;
       padding: 13px 14px;
-      font-size: 12.8px;
-      line-height: 1.9;
+      font-size: 12.3px;
+      line-height: 1.75;
       transition: 0.9s ease;
       z-index: 2;
       box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+      overflow: hidden;
     }
 
     .envelope.open .env-flap {
@@ -228,6 +229,7 @@
     }
 
     .envelope.open .letter {
+      height: 195px;
       transform: translateY(-125px);
       z-index: 7;
     }
@@ -391,6 +393,7 @@
 
     function playMusic() {
       music.play();
+      document.getElementById("visualizer").style.display = "block";
       startVisualizer();
     }
 
