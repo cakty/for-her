@@ -121,9 +121,7 @@
       min-width: 155px;
     }
 
-    button:hover {
-      transform: translateY(-4px) scale(1.04);
-    }
+    button:hover { transform: translateY(-4px) scale(1.04); }
 
     #visualizer {
       width: min(100%, 430px);
@@ -135,11 +133,10 @@
     }
 
     .envelope-wrap {
-      height: 285px;
+      height: 410px;
       display: flex;
       justify-content: center;
       align-items: flex-end;
-      margin-top: 0;
     }
 
     .envelope {
@@ -148,10 +145,6 @@
       position: relative;
       cursor: pointer;
       transition: 0.4s ease;
-    }
-
-    .envelope:hover {
-      transform: translateY(-5px);
     }
 
     .env-back {
@@ -207,20 +200,25 @@
 
     .letter {
       position: absolute;
-      left: 15px;
+      left: -35px;
       bottom: 18px;
-      width: 200px;
-      height: 118px;
+      width: 300px;
+      height: 145px;
       background: #fff8fb;
       color: #ff3f7f;
-      border-radius: 13px;
-      padding: 13px 14px;
-      font-size: 12.3px;
-      line-height: 1.75;
+      border-radius: 16px;
+      padding: 18px 20px;
+      font-size: 13px;
+      line-height: 1.85;
       transition: 0.9s ease;
       z-index: 2;
       box-shadow: 0 10px 25px rgba(0,0,0,0.12);
       overflow: hidden;
+    }
+
+    .letter strong {
+      font-weight: 900;
+      color: #d91f63;
     }
 
     .envelope.open .env-flap {
@@ -229,9 +227,10 @@
     }
 
     .envelope.open .letter {
-      height: 195px;
+      height: 365px;
       transform: translateY(-125px);
       z-index: 7;
+      overflow-y: auto;
     }
 
     .hint {
@@ -300,9 +299,13 @@
       .title-box { padding: 10px 22px; }
       h1 { font-size: 38px; }
       .envelope { transform: scale(0.88); }
-      .envelope:hover { transform: scale(0.88) translateY(-5px); }
-      .envelope-wrap { height: 270px; }
+      .envelope-wrap { height: 395px; }
       button { width: 100%; max-width: 250px; }
+      .letter {
+        left: -30px;
+        width: 290px;
+        font-size: 12.5px;
+      }
     }
   </style>
 </head>
@@ -347,11 +350,26 @@
           <div class="env-back"></div>
 
           <div class="letter">
-            عزیزترینم،<br>
-            شاید فاصله بین ما زیاد باشه،
-            ولی تو همیشه نزدیک‌ترین آدم به قلب منی.
-            این صفحه رو ساختم که هر وقت بازش کردی،
-            یادت بیاد یه نفر اون‌طرف دنیا با فکر تو لبخند می‌زنه. 💕
+            برام مهم نیست که<br>
+            با هم دیگه فرق داریم<br>
+            چیزی که برای من مهمه<br>
+            فقط <strong>تویی</strong><br>
+            واسه من فقط مهم <strong>تویی</strong><br><br>
+
+            من با عدم ابراز توجه و اهمیت کافی<br>
+            بهت حس ناامنی دادم<br>
+            و باعث شدم که تو اذیت شی<br>
+            و توی نشون دادن اهمیت دادنم<br>
+            یک‌کوچولو داغونم...<br><br>
+
+            این بهونه رو نمیارم که بگم تو<br>
+            مهم‌ترین اتفاقی هستی<br>
+            که تا حالا تو <strong>زندگیم</strong> افتاده.<br><br>
+
+            من واقعاً دلم نمی‌خواد که تو آسیب ببینی<br>
+            چون <strong>هیچ‌کس</strong> دیگه‌ای <strong>تو دنیا</strong><br>
+            اندازه <strong>تو</strong><br>
+            واسه من مهم نیست... ❤️
           </div>
 
           <div class="env-left"></div>
