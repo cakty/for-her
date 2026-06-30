@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>For Anise ❤️</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;700;900&family=Lalezar&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700;900&display=swap" rel="stylesheet">
 
   <style>
     * { box-sizing: border-box; }
@@ -35,14 +35,11 @@
       justify-content: center;
       align-items: center;
       padding: 28px 16px;
-      transition: 0.8s ease;
       position: relative;
       z-index: 10;
     }
 
-    .hidden {
-      display: none;
-    }
+    .hidden { display: none; }
 
     .box {
       width: min(94vw, 640px);
@@ -57,23 +54,25 @@
 
     .title-box {
       display: inline-block;
-      padding: 10px 34px;
-      border-radius: 24px;
-      background: rgba(255,255,255,0.16);
-      border: 1px solid rgba(255,255,255,0.22);
+      padding: 12px 32px;
+      border-radius: 22px;
+      background: rgba(255,255,255,0.13);
+      border: 1px solid rgba(255,255,255,0.25);
       margin-bottom: 18px;
+      max-width: 100%;
     }
 
     h1 {
-      font-family: "Lalezar", "Vazirmatn", sans-serif;
-      font-size: clamp(42px, 8vw, 64px);
+      font-size: clamp(38px, 7vw, 58px);
       margin: 0;
-      line-height: 1.1;
-      color: #fff;
-      -webkit-text-stroke: 1.2px rgba(120, 30, 65, 0.55);
+      line-height: 1.25;
+      color: #ffffff;
+      font-weight: 900;
+      letter-spacing: -1px;
+      -webkit-text-stroke: 0.6px rgba(130, 45, 80, 0.45);
       text-shadow:
-        0 3px 0 rgba(120, 30, 65, 0.18),
-        0 0 24px rgba(255,255,255,0.65);
+        0 2px 2px rgba(120, 30, 65, 0.25),
+        0 8px 22px rgba(255, 255, 255, 0.35);
     }
 
     p {
@@ -101,7 +100,6 @@
     .buttons {
       display: flex;
       justify-content: center;
-      align-items: center;
       gap: 14px;
       flex-wrap: wrap;
       direction: ltr;
@@ -123,9 +121,7 @@
       min-width: 155px;
     }
 
-    button:hover {
-      transform: translateY(-4px) scale(1.04);
-    }
+    button:hover { transform: translateY(-4px) scale(1.04); }
 
     #visualizer {
       width: min(100%, 430px);
@@ -152,9 +148,7 @@
       transition: 0.4s ease;
     }
 
-    .envelope:hover {
-      transform: translateY(-5px);
-    }
+    .envelope:hover { transform: translateY(-5px); }
 
     .env-back {
       position: absolute;
@@ -273,14 +267,14 @@
     }
 
     .final-message {
-      font-family: "Lalezar", "Vazirmatn", sans-serif;
       font-size: clamp(36px, 7vw, 58px);
       margin-top: 20px;
       opacity: 0;
       transform: scale(0.8);
       transition: 1s ease;
       color: white;
-      -webkit-text-stroke: 1px rgba(120, 30, 65, 0.55);
+      font-weight: 900;
+      -webkit-text-stroke: 0.6px rgba(130, 45, 80, 0.45);
       text-shadow: 0 0 25px white;
       direction: ltr;
     }
@@ -472,7 +466,6 @@
 
       source.connect(analyser);
       analyser.connect(audioContext.destination);
-
       analyser.fftSize = 128;
 
       const bufferLength = analyser.frequencyBinCount;
