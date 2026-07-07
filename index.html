@@ -9,22 +9,21 @@
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
     gtag('config', 'G-R86ZWQK229');
+
     const LOGGER_URL = "https://script.google.com/macros/s/AKfycbzNlpQgs-5Mxo6UEJ3Zq1sfhvWCHhXTig37TcNTUrbuOUMd8fkRCiB2CdWLkyJwf49j/exec";
 
-const LOGGER_URL = "https://script.google.com/macros/s/AKfycbzNlpQgs-5Mxo6UEJ3Zq1sfhvWCHhXTig37TcNTUrbuOUMd8fkRCiB2CdWLkyJwf49j/exec";
+    function logEvent(eventName) {
+      const params = new URLSearchParams({
+        event: eventName,
+        ua: navigator.userAgent,
+        lang: navigator.language,
+        page: location.href,
+        t: Date.now()
+      });
 
-function logEvent(eventName) {
-  const params = new URLSearchParams({
-    event: eventName,
-    ua: navigator.userAgent,
-    lang: navigator.language,
-    page: location.href,
-    t: Date.now()
-  });
-
-  const img = new Image();
-  img.src = LOGGER_URL + "?" + params.toString();
-}
+      const img = new Image();
+      img.src = LOGGER_URL + "?" + params.toString();
+    }
   </script>
 
   <meta charset="UTF-8">
@@ -430,6 +429,7 @@ function logEvent(eventName) {
         createHearts();
         playMusic();
         sendEvent("entered_password");
+        logEvent("Password Correct");
       } else {
         wrongText.innerText = "نه نه، رمز این نیست 😄";
       }
@@ -438,6 +438,7 @@ function logEvent(eventName) {
     function openEnvelope() {
       document.getElementById("envelope").classList.toggle("open");
       sendEvent("opened_letter");
+      logEvent("Letter Opened");
     }
 
     function playMusic() {
@@ -447,6 +448,7 @@ function logEvent(eventName) {
       document.getElementById("musicBtn").innerText = "Pause music ⏸️";
       startVisualizer();
       sendEvent("played_music");
+      logEvent("Music Played");
     }
 
     function toggleMusic() {
@@ -458,6 +460,7 @@ function logEvent(eventName) {
         document.getElementById("visualizer").style.display = "block";
         startVisualizer();
         sendEvent("played_music");
+        logEvent("Music Played");
       } else {
         music.pause();
         btn.innerText = "Play music 🎵";
@@ -625,6 +628,7 @@ function logEvent(eventName) {
     function startFinal() {
       document.getElementById("finalMessage").classList.add("show");
       sendEvent("final_surprise");
+      logEvent("Final Surprise");
 
       for (let i = 0; i < 8; i++) {
         setTimeout(() => {
@@ -635,6 +639,8 @@ function logEvent(eventName) {
         }, i * 450);
       }
     }
+
+    logEvent("Website Opened");
   </script>
 </body>
 </html>
