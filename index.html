@@ -2,22 +2,19 @@
 <html lang="fa">
 <head>
 
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-R86ZWQK229"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-    
-      gtag('config', 'G-R86ZWQK229');
-    </script>
-    
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>For Anise ❤️</title>
-    ...
-  <link rel="icon" type="image/png" href="heart.png">
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-R86ZWQK229"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-R86ZWQK229');
+  </script>
 
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>For Anise ❤️</title>
+  <link rel="icon" type="image/png" href="heart.png">
   <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700;900&display=swap" rel="stylesheet">
 
   <style>
@@ -399,6 +396,15 @@
     const wrongText = document.getElementById("wrongText");
     const music = document.getElementById("music");
 
+    function sendEvent(eventName) {
+      if (typeof gtag === "function") {
+        gtag("event", eventName, {
+          event_category: "for_anise",
+          event_label: "gift_site"
+        });
+      }
+    }
+
     function checkPassword() {
       const pass = document.getElementById("passwordInput").value.trim();
 
@@ -407,6 +413,7 @@
         mainScreen.classList.remove("hidden");
         createHearts();
         playMusic();
+        sendEvent("entered_password");
       } else {
         wrongText.innerText = "نه نه، رمز این نیست 😄";
       }
@@ -414,6 +421,7 @@
 
     function openEnvelope() {
       document.getElementById("envelope").classList.toggle("open");
+      sendEvent("opened_letter");
     }
 
     function playMusic() {
@@ -422,6 +430,7 @@
       document.getElementById("visualizer").style.display = "block";
       document.getElementById("musicBtn").innerText = "Pause music ⏸️";
       startVisualizer();
+      sendEvent("played_music");
     }
 
     function toggleMusic() {
@@ -432,6 +441,7 @@
         btn.innerText = "Pause music ⏸️";
         document.getElementById("visualizer").style.display = "block";
         startVisualizer();
+        sendEvent("played_music");
       } else {
         music.pause();
         btn.innerText = "Play music 🎵";
@@ -598,6 +608,7 @@
 
     function startFinal() {
       document.getElementById("finalMessage").classList.add("show");
+      sendEvent("final_surprise");
 
       for (let i = 0; i < 8; i++) {
         setTimeout(() => {
