@@ -9,6 +9,22 @@
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
     gtag('config', 'G-R86ZWQK229');
+    const LOGGER_URL = "https://script.google.com/macros/s/AKfycbzNlpQgs-5Mxo6UEJ3Zq1sfhvWCHhXTig37TcNTUrbuOUMd8fkRCiB2CdWLkyJwf49j/exec";
+
+function logEvent(eventName) {
+  fetch(LOGGER_URL, {
+    method: "POST",
+    mode: "no-cors",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      event: eventName,
+      userAgent: navigator.userAgent,
+      language: navigator.language
+    })
+  });
+}
   </script>
 
   <meta charset="UTF-8">
