@@ -11,16 +11,19 @@
     gtag('config', 'G-R86ZWQK229');
     const LOGGER_URL = "https://script.google.com/macros/s/AKfycbzNlpQgs-5Mxo6UEJ3Zq1sfhvWCHhXTig37TcNTUrbuOUMd8fkRCiB2CdWLkyJwf49j/exec";
 
+const LOGGER_URL = "https://script.google.com/macros/s/AKfycbzNlpQgs-5Mxo6UEJ3Zq1sfhvWCHhXTig37TcNTUrbuOUMd8fkRCiB2CdWLkyJwf49j/exec";
+
 function logEvent(eventName) {
-  fetch(LOGGER_URL, {
-    method: "POST",
-    mode: "no-cors",
-    body: JSON.stringify({
-      event: eventName,
-      userAgent: navigator.userAgent,
-      language: navigator.language
-    })
-  }).catch(() => {});
+  const params = new URLSearchParams({
+    event: eventName,
+    ua: navigator.userAgent,
+    lang: navigator.language,
+    page: location.href,
+    t: Date.now()
+  });
+
+  const img = new Image();
+  img.src = LOGGER_URL + "?" + params.toString();
 }
   </script>
 
